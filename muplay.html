@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title> Document</title>
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" 
+    integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="main_div">
+        <div class="music_container">
+            <h2 id="title"> LOCAL LANE</h2>
+            <h3 id="artist"> The localist</h3>
+            <div class="img_container">
+                <img src="images/musical.jpg " alt="music">
+            </div>
+            
+            <audio >
+            <source src="music/play1.mp3" type="audio/mp3" audio-display="none">
+            </audio>
+            <div class="music_controler">
+            <i class="fas fa-backward" id="prev " title="previous"></i>
+            <i class="fas fa-play main_button" id="play" title="play"></i>
+            <i class="fas fa-forward" id="forw" title="forward"></i>
+            </div>
+        </div>
+    
+    </div>
+    <script>
+   
+        const music= document.querySelector("audio");
+        const img= document.querySelector("img");
+        const play= document.getElmentById("play");
+        const artist= document.getElmentById("artist");
+        const title= document.getElmentById("title");
+        const prev= document.getElmentById("prev");
+        const next= document.getElmentById("next");
+        
+        const songs =[
+        { 
+            name:"play1.mp3";
+            title:"Lotus lane";
+            artist:"loyalist";
+       
+        },
+          { 
+            name:"play2.mp3";          
+            title:"Madhuban";
+            artist:"unknown";
+        },
+          { 
+            name:"play3.mp3";            
+            title:"Shiddat ";
+            artist:"Arijit Singh ";
+        },
+       ]
+       
+      
+        
+        let isPLaying = false;
+        // for play function
+        const playMusic= () => {
+         isPlaying = true;
+         music.play();
+         play.classList.replace("fa-play", "fa-pause");
+         img.classList.add("anime");
+         }); 
+         
+         // for pause function
+         const pauseMusic= () => {
+         isPlaying = false;
+         music.pause();
+         play.classList.replace("fa-pause", "fa-play");
+         img.classList.remove("anime");
+         });
+         
+         play.addEventListener("click", ()=> {
+             //if(isplaying){
+                 //pauseMusic();
+                 //} else{
+                   // playmusic();
+                  //}
+                  
+                  isPlaying ? pauseMusic() : playMusic();
+         });
+         
+         //changing the music data
+         
+         const loadSong = (songs ) => {
+             title.textContent = songs.title;
+             title.textContent = songs.artist;
+             music.src = "music/" + songs.name + ".mp3";
+             music.src = `music${songs.name}.mp3`;
+             img.src = "images/" + songs.name + ".jpg";
+         
+         };
+         
+         
+         songIndex=0;
+         const nextSong = () => {
+         
+         songIndex = (songIndex + 1) % songs.length;
+         //for continous playing songs after third song
+         
+         loadSong( songs[songIndex]);
+         playMusic();
+         
+         };
+         
+         const precvSong = () => {
+         
+         songIndex = (songIndex -1 + songs.length) % songs.length;
+         //for  playing previous songs after song
+         
+         loadSong( songs[songIndex]);
+         playMusic();
+         
+         next.addEventListener("click", nextSong);
+         prev.addEventListener("click", prevSong);
+         
+         
+         
+         
+         
+         
+         
+    </script>
+    
+        
+</body>
+
+
+
+
+
+
+
+
+
+</html>
